@@ -38,6 +38,9 @@ public class SplashPresenter extends BasePresenter<SplashConstract.ISplashView>
                         List<BingDailyPic.Images> images = bingDailyPic.getImages();
                         String url = "https://cn.bing.com" + images.get(new Random().nextInt(images.size())).getUrl();
                         mView.showImage(url);
+                        if (!mDisposable.isDisposed()) {
+                            mDisposable.dispose();
+                        }
                     }
 
                     @Override
