@@ -1,5 +1,6 @@
 package com.dxl.dall.splash;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dxl.dall.R;
 import com.dxl.dall.Util.CommonUtil;
 import com.dxl.dall.base.BaseActivity;
+import com.dxl.dall.main.MainActivity;
 
 import butterknife.BindView;
 import io.reactivex.Observer;
@@ -40,6 +42,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
     @Override
     protected void initView() {
+        //获取bing每日图片的URL，获取成功后showImage()
         mPresenter.getImageURL();
         CommonUtil.countDown(COUNT_DOWN_TIME)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -64,9 +67,15 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
                     @Override
                     public void onComplete() {
-                        Toast.makeText(SplashActivity.this, "完成", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SplashActivity.this, "完成", Toast.LENGTH_SHORT).show();
+                        toMainActivity();
                     }
                 });
+    }
+
+
+    private void toMainActivity(){
+        startActivity(new Intent(this, MainActivity.class));
     }
 
 
