@@ -33,10 +33,9 @@ public class MainActivity extends BaseActivity {
 
         for (int i = 0; i < 6; i++) {
             pagerAdapter.addFragment(CategoryFragment.newInstance(i));
-
         }
-
         mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setOffscreenPageLimit(pagerAdapter.getCount());
         mTablayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
     }

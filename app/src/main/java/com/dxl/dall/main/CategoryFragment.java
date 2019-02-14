@@ -45,9 +45,9 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
 
     @Override
     protected void initView() {
-        mAdapter = new CategoryResultAdapter(getContext());
+        mAdapter = new CategoryResultAdapter(getContext(), R.layout.category_result_item_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
         mPresenter.loadCategoryResult(true);
 
@@ -73,7 +73,7 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
 
     @Override
     public void onSuccess(CategoryResult datas) {
-        mAdapter.setDatas(datas);
+        mAdapter.setDatas(datas.results);
     }
 
     @Override
