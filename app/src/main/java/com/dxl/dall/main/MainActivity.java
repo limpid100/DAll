@@ -9,6 +9,8 @@ import com.dxl.dall.entity.GlobalConfig;
 
 import butterknife.BindView;
 
+import static com.dxl.dall.entity.GlobalConfig.CATEGORY_TITLES;
+
 /**
  * @author dxl
  * @date 2019/2/13 14:40
@@ -27,18 +29,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        String[] titles = new String[]{
-                GlobalConfig.CATEGORY_NAME_APP,
-                GlobalConfig.CATEGORY_NAME_ANDROID,
-                GlobalConfig.CATEGORY_NAME_IOS,
-                GlobalConfig.CATEGORY_NAME_FRONT_END,
-                GlobalConfig.CATEGORY_NAME_RECOMMEND,
-                GlobalConfig.CATEGORY_NAME_RESOURCE
-        };
-        MainViewPagerAdapter pagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), titles);
+        MainViewPagerAdapter pagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), CATEGORY_TITLES);
 
         for (int i = 0; i < 6; i++) {
-            pagerAdapter.addFragment(CategoryFragment.newInstance());
+            pagerAdapter.addFragment(CategoryFragment.newInstance(i));
 
         }
 

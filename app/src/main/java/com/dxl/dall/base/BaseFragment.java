@@ -16,7 +16,7 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
 
     private Unbinder unbinder;
 
-    private T mPresenter;
+    protected T mPresenter;
 
 
     @Nullable
@@ -40,11 +40,11 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
 
     }
 
-    private void initView() {
+    protected void initView() {
 
     }
 
-    private T createPresenter() {
+    protected T createPresenter() {
         return null;
     }
 

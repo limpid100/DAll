@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -67,7 +66,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
                     @Override
                     public void onComplete() {
-//                        Toast.makeText(SplashActivity.this, "完成", Toast.LENGTH_SHORT).show();
                         toMainActivity();
                     }
                 });
@@ -76,6 +74,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
     private void toMainActivity(){
         startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
 
