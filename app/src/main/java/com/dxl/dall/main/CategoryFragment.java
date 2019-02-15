@@ -47,7 +47,7 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
 
     @Override
     protected void initView() {
-        mAdapter = new CategoryResultAdapter(getContext(), R.layout.category_result_item_view);
+        mAdapter = new CategoryResultAdapter(getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);

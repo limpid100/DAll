@@ -1,9 +1,11 @@
 package com.dxl.dall.main;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -11,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dxl.dall.R;
 import com.dxl.dall.base.BaseActivity;
 import com.dxl.dall.entity.GlobalConfig;
+import com.dxl.dall.search.SearchActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,11 +65,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mPresenter.getTopImageUrl();
     }
 
+    @OnClick(R.id.ll_search)
+    void searchClicked(){
+        startActivity(new Intent(this, SearchActivity.class));
+    }
+
     @Override
     public void showTopImage(String url) {
         Glide.with(this).load(url)
                 .apply(new RequestOptions()
-                        .error(R.mipmap.ic_launcher)
+                        .error(R.drawable.default_image)
                         .centerCrop())
                 .into(mTopImage);
     }

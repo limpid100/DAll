@@ -20,8 +20,8 @@ import java.util.List;
 public class CategoryResultAdapter extends CommonRecyclerViewAdapter<CategoryResult.ResultsBean> {
 
 
-    public CategoryResultAdapter(Context context, int layoutID) {
-        super(context, layoutID);
+    public CategoryResultAdapter(Context context) {
+        super(context, R.layout.category_result_item_view);
     }
 
     @Override

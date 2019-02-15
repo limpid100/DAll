@@ -4,6 +4,8 @@ import com.dxl.dall.base.BasePresenter;
 import com.dxl.dall.entity.CategoryResult;
 import com.dxl.dall.network.NetWork;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
@@ -34,6 +36,7 @@ public class MainPresenter extends BasePresenter<MainContract.IMainView> impleme
         mView.isLoadingImage(true);
 
         NetWork.getGankApi().getRandomBeauties(1)
+                .delay(1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(new Function<CategoryResult, ObservableSource<CategoryResult.ResultsBean>>() {

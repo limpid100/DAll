@@ -13,12 +13,14 @@ import com.dxl.dall.base.BaseActivity;
 import com.dxl.dall.main.MainActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 /**
  * 闪屏
+ *
  * @author dxl
  * @date 2019/2/13 14:55
  */
@@ -28,7 +30,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     @BindView(R.id.iv_splash)
     ImageView mSplashImage;
 
-    public static final int COUNT_DOWN_TIME = 5;
+    public static final int COUNT_DOWN_TIME = 3;
     private Disposable mDisposable;
 
     @Override
@@ -74,7 +76,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     }
 
 
-    private void toMainActivity(){
+    private void toMainActivity() {
         startActivity(new Intent(this, MainActivity.class));
         // Activity 切换淡入淡出动画
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -103,5 +105,10 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     @Override
     public void onError(Throwable e) {
         Glide.with(this).load(R.mipmap.splash_default).into(mSplashImage);
+    }
+
+    @OnClick(R.id.btn_skip)
+    void skipClicked() {
+        toMainActivity();
     }
 }

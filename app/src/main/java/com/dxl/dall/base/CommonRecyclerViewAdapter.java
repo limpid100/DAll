@@ -42,6 +42,10 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         notifyDataSetChanged();
     }
 
+    public List<T> getDatas(){
+        return mList;
+    }
+
 
     @NonNull
     @Override
