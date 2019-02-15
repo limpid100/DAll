@@ -19,6 +19,15 @@ import io.reactivex.schedulers.Schedulers;
 public class SplashPresenter extends BasePresenter<SplashConstract.ISplashView>
         implements SplashConstract.ISplashPresenter {
 
+    private Disposable mDisposable = null;
+
+    @Override
+    public void detachView() {
+        super.detachView();
+        if (mDisposable != null && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+        }
+    }
 
     @Override
     public void getImageURL() {
@@ -26,7 +35,7 @@ public class SplashPresenter extends BasePresenter<SplashConstract.ISplashView>
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BingDailyPic>() {
-                    Disposable mDisposable;
+
 
                     @Override
                     public void onSubscribe(Disposable d) {

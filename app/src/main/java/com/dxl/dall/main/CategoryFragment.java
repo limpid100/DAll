@@ -7,12 +7,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.dxl.dall.R;
 import com.dxl.dall.base.BaseFragment;
 import com.dxl.dall.entity.CategoryResult;
 
 import butterknife.BindView;
 
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
 import static com.dxl.dall.entity.GlobalConfig.CATEGORY_TITLES;
 
 /**
@@ -49,6 +51,17 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == SCROLL_STATE_IDLE) {
+                    //停止滚动
+                    Glide.with(getContext()).resumeRequests();
+                }else {
+                    Glide.with(getContext()).pauseRequests();
+                }
+            }
+        });
         mPresenter.loadCategoryResult(true);
 
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

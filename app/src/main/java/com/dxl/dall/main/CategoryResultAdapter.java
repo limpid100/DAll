@@ -3,6 +3,7 @@ package com.dxl.dall.main;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.dxl.dall.R;
@@ -24,7 +25,7 @@ public class CategoryResultAdapter extends CommonRecyclerViewAdapter<CategoryRes
     }
 
     @Override
-    protected void bindData(CommonRecyclerViewHolder holder, CategoryResult.ResultsBean resultsBean) {
+    protected void bindData(CommonRecyclerViewHolder holder, CategoryResult.ResultsBean resultsBean, int position) {
         holder.setTextView(R.id.tv_desc, resultsBean.desc);
         List<String> images = resultsBean.images;
         ImageView imageView = holder.getView(R.id.image_view);
@@ -36,6 +37,13 @@ public class CategoryResultAdapter extends CommonRecyclerViewAdapter<CategoryRes
         } else {
             imageView.setVisibility(View.INVISIBLE);
         }
+        holder.setOnClickListener(position, new CommonRecyclerViewHolder.ListenerWithPosition.OnClickWithPositionListener() {
+            @Override
+            public void onClick(View v, int position) {
+                //todo 跳转webview
+                Toast.makeText(mContext, "position:" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

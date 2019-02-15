@@ -18,6 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 /**
+ * 闪屏
  * @author dxl
  * @date 2019/2/13 14:55
  */
@@ -28,6 +29,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     ImageView mSplashImage;
 
     public static final int COUNT_DOWN_TIME = 5;
+    private Disposable mDisposable;
 
     @Override
     protected int getContentViewId() {
@@ -48,7 +50,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
                 .subscribe(new Observer<Long>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        mDisposable = d;
                     }
 
                     @Override
@@ -74,9 +76,18 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
     private void toMainActivity(){
         startActivity(new Intent(this, MainActivity.class));
+        // Activity 切换淡入淡出动画
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+        }
+    }
 
     @Override
     public void showImage(String url) {

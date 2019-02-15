@@ -53,7 +53,7 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(@NonNull CommonRecyclerViewHolder holder, int position) {
         T t = mList.get(position);
-        bindData(holder, t);
+        bindData(holder, t, position);
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
      * @param holder
      * @param t
      */
-    protected abstract void bindData(CommonRecyclerViewHolder holder, T t);
+    protected abstract void bindData(CommonRecyclerViewHolder holder, T t, int position);
 
     @Override
     public int getItemCount() {

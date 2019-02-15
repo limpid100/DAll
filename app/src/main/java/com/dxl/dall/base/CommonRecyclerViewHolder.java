@@ -49,7 +49,7 @@ public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    static class ListenerWithPosition implements View.OnClickListener {
+    public static class ListenerWithPosition implements View.OnClickListener {
 
         public ListenerWithPosition(int position, OnClickWithPositionListener clickWithPositionListener) {
             mPosition = position;
@@ -64,7 +64,7 @@ public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         OnClickWithPositionListener mClickWithPositionListener;
 
-        interface OnClickWithPositionListener {
+        public interface OnClickWithPositionListener {
             void onClick(View v, int position);
         }
 
