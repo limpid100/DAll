@@ -1,13 +1,20 @@
 package com.dxl.dall.main;
 
+import android.database.sqlite.SQLiteDatabase;
+
+import com.dxl.dall.base.BaseApplication;
 import com.dxl.dall.base.BasePresenter;
 import com.dxl.dall.entity.CategoryResult;
 import com.dxl.dall.network.NetWork;
+import com.dxl.dall.util.DatabaseHelper;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.dxl.dall.database.SqliteDateBaseHelper.CATEGORY_RESULT_TABLE_NAME;
 
 /**
  * @author dxl
@@ -27,6 +34,14 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.ICategoryV
         }
         NetWork.getGankApi().getCategoryDate(mView.getCategoryName(), 10, mPage)
                 .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                //先保存数据库
+                .doOnNext(new Consumer<CategoryResult>() {
+                    @Override
+                    public void accept(CategoryResult categoryResult) {
+                        saveDatabase(categoryResult);
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CategoryResult>() {
                     @Override
@@ -50,5 +65,23 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.ICategoryV
                         mView.showLoading(false);
                     }
                 });
+    }
+
+    /**
+     * 在线获取的数据，保存数据库
+     * 如果数据库中已经存在，用数据库的数据去更新在线获取的数据（isread）
+     * @param categoryResult
+     */
+    private void saveDatabase(CategoryResult categoryResult) {
+        SQLiteDatabase db = BaseApplication.getInstance().getDB();
+        for (CategoryResult.ResultsBean result : categoryResult.results) {
+            CategoryResult.ResultsBean databaseResult = DatabaseHelper.selectCategoryResultBean("SELECT ID, ISREAD FROM " + CATEGORY_RESULT_TABLE_NAME + " WHERE ID = ? ",
+                    new String[]{result._id});
+            if (databaseResult == null) {
+                db.insert(CATEGORY_RESULT_TABLE_NAME, null, result.getContentValues());
+            }else {
+                result.isread = databaseResult.isread;
+            }
+        }
     }
 }

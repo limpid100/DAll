@@ -31,6 +31,7 @@
         android:layout_marginBottom="8dp"
         android:text="2000-01-01"
         android:textColor="@color/main_gray"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/tv_desc"
         app:layout_constraintTop_toBottomOf="@id/tv_desc" />
 
@@ -42,11 +43,23 @@
         android:layout_marginLeft="8dp"
         android:text="Web"
         android:textColor="@color/main_gray"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_date"
         app:layout_constraintStart_toEndOf="@+id/tv_date"
         app:layout_constraintTop_toTopOf="@+id/tv_date" />
 
+    <View
+        android:id="@+id/delete_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_delete"
+        app:layout_constraintLeft_toLeftOf="@id/iv_delete"
+        app:layout_constraintRight_toRightOf="@id/iv_delete"
+        app:layout_constraintTop_toTopOf="@id/iv_delete" />
+
     <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_delete"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginEnd="8dp"
@@ -58,33 +71,33 @@
 
     <ImageView
         android:id="@+id/image1"
-        android:scaleType="centerCrop"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="5dp"
-        tools:src="@drawable/default_image"
+        android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="@id/tv_desc"
-        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+        app:layout_constraintTop_toBottomOf="@id/tv_date"
+        tools:src="@drawable/default_image" />
 
     <ImageView
         android:id="@+id/image2"
-        android:scaleType="centerCrop"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="5dp"
-        tools:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
         app:layout_constraintLeft_toRightOf="@id/image1"
-        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+        app:layout_constraintTop_toBottomOf="@id/tv_date"
+        tools:src="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/image3"
-        android:scaleType="centerCrop"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="5dp"
-        tools:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
         app:layout_constraintLeft_toRightOf="@id/image2"
-        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+        app:layout_constraintTop_toBottomOf="@id/tv_date"
+        tools:src="@mipmap/ic_launcher" />
 
 
 </android.support.constraint.ConstraintLayout>

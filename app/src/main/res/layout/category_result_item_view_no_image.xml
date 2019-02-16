@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="2000-01-01"
+        android:textSize="12sp"
         android:textColor="@color/main_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_desc" />
@@ -41,12 +42,24 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Web"
+        android:textSize="12sp"
         android:textColor="@color/main_gray"
         app:layout_constraintBottom_toBottomOf="@+id/tv_date"
         app:layout_constraintStart_toEndOf="@+id/tv_date"
         app:layout_constraintTop_toTopOf="@+id/tv_date" />
 
+    <View
+        android:id="@+id/delete_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_delete"
+        app:layout_constraintLeft_toLeftOf="@id/iv_delete"
+        app:layout_constraintRight_toRightOf="@id/iv_delete"
+        app:layout_constraintTop_toTopOf="@id/iv_delete" />
+
     <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_delete"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginEnd="8dp"
