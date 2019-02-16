@@ -8,6 +8,9 @@ import com.dxl.dall.entity.CategoryResult;
 import com.dxl.dall.network.NetWork;
 import com.dxl.dall.util.DatabaseHelper;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -42,6 +45,14 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.ICategoryV
                         saveDatabase(categoryResult);
                     }
                 })
+                .onErrorResumeNext(Observable.create(new ObservableOnSubscribe<CategoryResult>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<CategoryResult> emitter) throws Exception {
+                        emitter.onNext(DatabaseHelper.selectCategoryResult(mView.getCategoryName()));
+                        emitter.onComplete();
+                    }
+                }).subscribeOn(Schedulers.io()))
+                .onErrorResumeNext(Observable.<CategoryResult>error(new Throwable("获取本地数据失败")))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CategoryResult>() {
                     @Override
@@ -70,6 +81,7 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.ICategoryV
     /**
      * 在线获取的数据，保存数据库
      * 如果数据库中已经存在，用数据库的数据去更新在线获取的数据（isread）
+     *
      * @param categoryResult
      */
     private void saveDatabase(CategoryResult categoryResult) {
@@ -79,7 +91,7 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.ICategoryV
                     new String[]{result._id});
             if (databaseResult == null) {
                 db.insert(CATEGORY_RESULT_TABLE_NAME, null, result.getContentValues());
-            }else {
+            } else {
                 result.isread = databaseResult.isread;
             }
         }
