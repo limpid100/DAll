@@ -1,8 +1,7 @@
-package com.dxl.dall.Util;
+package com.dxl.dall.util;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 

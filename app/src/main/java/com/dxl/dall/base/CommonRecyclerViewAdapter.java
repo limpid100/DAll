@@ -19,6 +19,7 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
     private List<T> mList;
     protected Context mContext;
     private int mLayoutID;
+    protected MuiltipleTypeSupport<T> mMuiltipleTypeSupport;
 
     public CommonRecyclerViewAdapter(Context context, int layoutID) {
         mContext = context;
@@ -26,14 +27,20 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         mLayoutID = layoutID;
     }
 
+    public CommonRecyclerViewAdapter(Context context, MuiltipleTypeSupport<T> muiltipleTypeSupport) {
+        mContext = context;
+        mList = new ArrayList<>();
+        this.mMuiltipleTypeSupport = muiltipleTypeSupport;
+    }
+
     public void addData(T t) {
         mList.add(t);
         notifyItemInserted(mList.size() - 1);
     }
 
-    public void addDatas(List<T> ts){
+    public void addDatas(List<T> ts) {
         mList.addAll(ts);
-        notifyItemRangeInserted(mList.size()-ts.size(), mList.size());
+        notifyItemRangeInserted(mList.size() - ts.size(), mList.size());
     }
 
     public void setDatas(List<T> ts) {
@@ -42,7 +49,7 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         notifyDataSetChanged();
     }
 
-    public List<T> getDatas(){
+    public List<T> getDatas() {
         return mList;
     }
 
@@ -50,8 +57,21 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
     @NonNull
     @Override
     public CommonRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(mLayoutID, parent, false);
+        View view;
+        if (mMuiltipleTypeSupport != null) {
+            view = LayoutInflater.from(mContext).inflate(mMuiltipleTypeSupport.getLayoutID(viewType), parent, false);
+        } else {
+            view = LayoutInflater.from(mContext).inflate(mLayoutID, parent, false);
+        }
         return new CommonRecyclerViewHolder(view);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mMuiltipleTypeSupport != null) {
+            return mMuiltipleTypeSupport.getItemViewType(position, mList.get(position));
+        }
+        return super.getItemViewType(position);
     }
 
     @Override
@@ -62,6 +82,7 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
 
     /**
      * 数据绑定，子类实现
+     *
      * @param holder
      * @param t
      */
@@ -70,5 +91,18 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
     @Override
     public int getItemCount() {
         return mList.size();
+    }
+
+
+    /**
+     * 多布局支持
+     * https://blog.csdn.net/lmj623565791/article/details/51118836
+     *
+     * @param <T>
+     */
+    public interface MuiltipleTypeSupport<T> {
+        int getLayoutID(int viewType);
+
+        int getItemViewType(int position, T t);
     }
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="80dp"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:maxLines="2"
+        android:textColor="@color/main_black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="测试测试测试测试测试测试测试测试测试测试测试测试" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="2000-01-01"
+        android:textColor="@color/main_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_desc" />
+
+    <TextView
+        android:id="@+id/tv_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Web"
+        android:textColor="@color/main_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+        app:layout_constraintStart_toEndOf="@+id/tv_date"
+        app:layout_constraintTop_toTopOf="@+id/tv_date" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_source"
+        app:layout_constraintEnd_toEndOf="@+id/tv_desc"
+        app:layout_constraintTop_toTopOf="@+id/tv_source"
+        app:srcCompat="@drawable/ic_delete" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -4,16 +4,16 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dxl.dall.R;
 import com.dxl.dall.base.BaseActivity;
-import com.dxl.dall.entity.GlobalConfig;
 import com.dxl.dall.search.SearchActivity;
+import com.dxl.dall.util.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,6 +34,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     ImageView mTopImage;
     @BindView(R.id.fab)
     FloatingActionButton mFab;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Override
     protected int getContentViewId() {
@@ -47,6 +49,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initView() {
+        StatusBarUtil.immersive(this);
+//        StatusBarUtil.setPaddingSmart(this, mTopImage);
+        StatusBarUtil.setPaddingSmart(this, mToolbar);
         MainViewPagerAdapter pagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), CATEGORY_TITLES);
 
         for (int i = 0; i < CATEGORY_TITLES.length; i++) {

@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dxl.dall.R;
-import com.dxl.dall.Util.CommonUtil;
 import com.dxl.dall.base.BaseActivity;
 import com.dxl.dall.main.MainActivity;
+import com.dxl.dall.util.CommonUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -75,8 +75,14 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
                 });
     }
 
+    private boolean isIn = false;
+
 
     private void toMainActivity() {
+        if (isIn) {
+            return;
+        }
+        isIn = true;
         startActivity(new Intent(this, MainActivity.class));
         // Activity 切换淡入淡出动画
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

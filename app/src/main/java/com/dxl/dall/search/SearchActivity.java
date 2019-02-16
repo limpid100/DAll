@@ -16,10 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dxl.dall.R;
-import com.dxl.dall.Util.KeyboardUtils;
 import com.dxl.dall.base.BaseActivity;
 import com.dxl.dall.entity.CategoryResult;
 import com.dxl.dall.main.CategoryResultAdapter;
+import com.dxl.dall.util.KeyboardUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;

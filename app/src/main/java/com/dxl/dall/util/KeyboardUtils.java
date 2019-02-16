@@ -1,4 +1,4 @@
-package com.dxl.dall.Util;
+package com.dxl.dall.util;
 
 import android.app.Activity;
 import android.content.Context;
